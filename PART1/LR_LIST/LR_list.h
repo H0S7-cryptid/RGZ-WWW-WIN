@@ -30,4 +30,8 @@ TV CreateUserTV();
 
 // Функция для удаления списка
 void DeleteList(node** head);
+
+// Методы для обработки потока ввода
+void clearInputBuffer(void);
+void removeNewline(char* str, size_t buf_size);
 #endif
