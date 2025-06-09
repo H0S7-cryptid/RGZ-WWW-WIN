@@ -26,22 +26,22 @@ TV* initTV(TV* tv, char* name, char* brand,  int price,
 }
 
 int tryPrice(int price) {
-	if (price < 0 || price > 1000000) return -1;
+	if (price < 0 || price > 1000000) return 0;
 	return 1;
 }
 
 int tryScreenSize(char scrsize) {
-	if (scrsize < 0 || scrsize > 800) return -1;
+	if (scrsize < 0 || scrsize > 800) return 0;
 	return 1;
 }
 
 int tryScreenType(ST screentype) {
-	if (screentype < 0 || screentype > 5) return -1;
+	if (screentype < 0 || screentype > 5) return 0;
 	return 1;
 }
 
 int tryRefreshRate(short refreshrate) {
-	if (refreshrate < 0 || refreshrate > 1000) return -1;
+	if (refreshrate < 0 || refreshrate > 1000) return 0;
 	return 1;
 }
 
@@ -88,12 +88,12 @@ char* CreateScreenTypeForm(ST st) {
 
 void printTV(TV* tv) {
 	char* ScreenType = CreateScreenTypeForm(tv->screentype);
-	printf("\t%s\n", tv->brand);
-	printf("\t%s\n", tv->name);
-	printf("\t%d\n", tv->price);
-	printf("\t%d\n", tv->refreshRate);
-	printf("\t%d\n", tv->screenSize);
-	printf("\t%s\n", ScreenType);
+	printf("\tBrand: %s\n", tv->brand);
+	printf("\tName: %s\n", tv->name);
+	printf("\tPrice: %d Rub\n", tv->price);
+	printf("\tRefresh rate: %d Hz\n", tv->refreshRate);
+	printf("\tScreen size (in inches): %d \n", tv->screenSize);
+	printf("\tScreen type: %s\n", ScreenType);
 }
 
 int isEqualStr(const char* name1, const char* name2) {
