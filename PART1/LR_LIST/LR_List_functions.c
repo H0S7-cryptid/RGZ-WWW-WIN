@@ -25,8 +25,9 @@ void PrintList(node* head) {
 	int pos = 1;
 	printf("Current elements in list:\n");
 	while (temp != NULL) {
-		printf("Tv №%d", pos);
+		printf("Tv-%d:", pos);
 		printTV(&temp->data);
+		temp = temp->next;
 	}
 }
 
@@ -133,40 +134,64 @@ node* GetTV(node** head, int grab_pos) {
 	return current;
 }
 
+void clearInputBuffer(void) {
+	int ch;
+	while ((ch = getchar()) != '\n' && ch != EOF);
+}
+
+void removeNewline(char* str, size_t buf_size) {
+	size_t len = strlen(str);
+
+	if (len > 0 && str[len - 1] == '\n') str[len - 1] = '\0';
+
+	else clearInputBuffer();
+}
+
 TV CreateUserTV() {
 	TV tv;
 	char buffer[BUFF_SIZE];
-	
-	char name[MAX_TV_NAME];
+
 	char brand[MAX_BRAND_NAME];
-	int price = 0;						
+	char name[MAX_TV_NAME];
+	int price = 0;
 	char screenSize = 0;
 	ST screentype = 0;
 	short refreshRate = 0;
 
 	printf("Type in brand of the TV: ");
-	fgets(name, MAX_TV_NAME, stdin);
+	if (fgets(brand, MAX_BRAND_NAME, stdin) != NULL) removeNewline(brand, MAX_BRAND_NAME);
 
 	printf("Type in name of the TV: ");
-	fgets(brand, MAX_BRAND_NAME, stdin);
+	if (fgets(name, MAX_TV_NAME, stdin) != NULL) removeNewline(name, MAX_TV_NAME);
 
 	printf("Type in screen size of the TV: ");
-	fgets(buffer, BUFF_SIZE, stdin);
-	if (IsTrueNumber(buffer) == NUM_IS_GOOD) screenSize = (char)atoi(buffer);
+	if (fgets(buffer, BUFF_SIZE, stdin) != NULL) {
+		removeNewline(buffer, BUFF_SIZE);
+		if (IsTrueNumber(buffer) == NUM_IS_GOOD)
+			screenSize = (char)atoi(buffer);
+	}
 
 	printf("Type in screen type of the TV - LED (0), OLED (1), QLED (2), LCD (3), MiniLED (4), MicroLED (5)\n");
-	fgets(buffer, BUFF_SIZE, stdin);
-	if (IsTrueNumber(buffer) == NUM_IS_GOOD) screentype = (ST)atoi(buffer);
+	if (fgets(buffer, BUFF_SIZE, stdin) != NULL) {
+		removeNewline(buffer, BUFF_SIZE);
+		if (IsTrueNumber(buffer) == NUM_IS_GOOD)
+			screentype = (ST)atoi(buffer);
+	}
 
-	printf("Type in refresh rate of the TV`s screen: ");
-	fgets(buffer, BUFF_SIZE, stdin);
-	if (IsTrueNumber(buffer) == NUM_IS_GOOD) refreshRate = (short)atoi(buffer);
+	printf("Type in refresh rate of the TV's screen: ");
+	if (fgets(buffer, BUFF_SIZE, stdin) != NULL) {
+		removeNewline(buffer, BUFF_SIZE);
+		if (IsTrueNumber(buffer) == NUM_IS_GOOD)
+			refreshRate = (short)atoi(buffer);
+	}
 
 	printf("Type in price of the TV: ");
-	fgets(buffer, BUFF_SIZE, stdin);
-	if (IsTrueNumber(buffer) == NUM_IS_GOOD) price = atoi(buffer);
-	
-	initTV(&tv, name, brand, price, screenSize, screentype, refreshRate);
+	if (fgets(buffer, BUFF_SIZE, stdin) != NULL) {
+		removeNewline(buffer, BUFF_SIZE);
+		if (IsTrueNumber(buffer) == NUM_IS_GOOD)
+			price = atoi(buffer);
+	}
 
+	initTV(&tv, name, brand, price, screenSize, screentype, refreshRate);
 	return tv;
 }
