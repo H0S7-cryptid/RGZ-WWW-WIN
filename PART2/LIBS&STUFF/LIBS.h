@@ -5,5 +5,6 @@
 #include <vector>
 #include <algorithm>
 #include "MAPS.h"
+#include <list>
 
 #endif // LIBS
