@@ -1,0 +1,48 @@
+#ifndef RADIO
+#define RADIO
+
+#include "LIBS.h"
+
+class Radio {
+private:
+	std::string name;
+	std::string brand;
+	double price;
+	Tuner tuner;
+	IsPortable isportable;
+	SuppFreq suppfreq;
+
+	void tryString(std::string str);
+	void Init(std::string name, std::string brand, double price,
+		Tuner tuner, IsPortable isportable, SuppFreq suppfreq);
+public:
+	// Конструкторы
+	Radio();
+	Radio(std::string name, std::string brand, double price, 
+		Tuner tuner, IsPortable isportable, SuppFreq suppfreq);
+	Radio(const Radio& other);
+
+	// Оператор присваивания
+	Radio& operator=(const Radio& other);
+
+	// Сеттеры
+	void setName(std::string str);
+	void setBrand(std::string str);
+	void setPrice(double price);
+	void setTuner(Tuner tuner);
+	void setIsPort(IsPortable isportable);
+	void setSuppFreq(SuppFreq suppfreq);
+
+	// Геттеры
+	std::string getName() const;
+	std::string getBrand() const;
+	double getPrice() const;
+	Tuner getTuner() const;
+	IsPortable getIsPort() const;
+	SuppFreq getSuppFreq() const;
+
+	// Оператор вывода данных в поток
+	friend std::ostream& operator<<(std::ostream& out, const Radio& radio);
+};
+
+#endif
