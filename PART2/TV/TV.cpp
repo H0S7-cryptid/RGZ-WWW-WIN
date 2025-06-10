@@ -79,6 +79,9 @@ TV& TV::operator=(const TV& other) {
 		this->brand = other.brand;
 		this->price = other.price;
 		this->screentype = other.screentype;
+		this->resolutionWidth = other.resolutionWidth;
+		this->resolutionHeight = other.resolutionHeight;
+		this->screensize = other.screensize;
 	}
 	return *this;
 }
