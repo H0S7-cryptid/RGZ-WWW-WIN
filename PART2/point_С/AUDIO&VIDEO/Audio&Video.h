@@ -17,7 +17,6 @@ public:
 	AudioAndVideo(std::string name, std::string brand, double price);
 	AudioAndVideo(const AudioAndVideo& other);
 
-	virtual std::ostream& print(std::ostream& out) const;
 	AudioAndVideo& operator=(const AudioAndVideo& other);
 
 	// Сеттеры
@@ -31,6 +30,7 @@ public:
 	double getPrice() const;
 
 	// Оператор вывода в поток
+	virtual std::ostream& print(std::ostream& out) const;
 	friend std::ostream& operator<<(std::ostream& out, const AudioAndVideo& av);
 };
 
